@@ -123,3 +123,13 @@ td {
     background-color: rgb(228, 140, 25); /* Color de fondo para el texto seleccionado */
     color: rgb(44, 44, 44); /* Color del texto seleccionado */
 }
+
+@media screen and (max-width: 575px){
+    .logo{
+        width: 4rem;
+    }
+    .navbar p {
+        font-size: 2.5rem !important; /* Ajusta según el tamaño inicial */
+        transition: font-size 0.5s ease-in-out;
+    }
+}

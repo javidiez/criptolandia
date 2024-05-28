@@ -257,7 +257,7 @@ function criptoTrend(cripto) {
         fila.appendChild(celdaImgExchange);
 
         let celdaPrice = document.createElement('td');
-        let priceFixed = (item.data.price).toFixed(10);
+        let priceFixed = (item.data.price).toFixed(7);
         celdaPrice.innerHTML = priceFixed;
         fila.appendChild(celdaPrice);
 
