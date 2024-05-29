@@ -2,13 +2,8 @@
 const apiKey = 'CG-YUaZs4DtjnyZJsnxdb9jCPmN';
 
 
-function fetchBtc() {
-    const options = {
-        method: 'GET',
-        headers: { accept: 'application/json', 'x-cg-demo-api-key': apiKey }
-    };
-
-    fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&precision=2', options)
+const fetchBtc = () => {
+    fetch('http://localhost:3000/api/bitcoin')
         .then(response => response.json())
         .then(response => btc(response))
         .catch(err => console.error(err));
@@ -54,13 +49,8 @@ function btc(cripto) {
     })
 }
 
-function fetchEth() {
-    const options = {
-        method: 'GET',
-        headers: { accept: 'application/json', 'x-cg-demo-api-key': apiKey }
-    };
-
-    fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum&precision=2', options)
+const fetchEth = () => {
+    fetch('http://localhost:3000/api/ethereum')
         .then(response => response.json())
         .then(response => eth(response))
         .catch(err => console.error(err));
@@ -105,18 +95,12 @@ function eth(cripto) {
     })
 }
 
-function fetchCriptoList() {
-    const options = {
-        method: 'GET',
-        headers: { accept: 'application/json', 'x-cg-demo-api-key': apiKey }
-    };
-
-    fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd', options)
+const fetchCriptoList = () => {
+    fetch('http://localhost:3000/api/criptolist')
         .then(response => response.json())
         .then(response => criptoList(response))
         .catch(err => console.error(err));
 }
-
 
 function criptoList(cripto) {
 
@@ -180,13 +164,8 @@ function criptoList(cripto) {
     });
 }
 
-function fetchCriptoExchange() {
-    const options = {
-        method: 'GET',
-        headers: { accept: 'application/json', 'x-cg-demo-api-key': apiKey }
-    };
-
-   fetch('https://api.coingecko.com/api/v3/exchanges?per_page=10', options)
+const fetchCriptoExchange = () => {
+    fetch('http://localhost:3000/api/exchanges')
         .then(response => response.json())
         .then(response => criptoExchange(response))
         .catch(err => console.error(err));
@@ -225,13 +204,8 @@ function criptoExchange(exchange) {
     });
 }
 
-function fetchCriptoTrend() {
-    const options = {
-        method: 'GET',
-        headers: {accept: 'application/json', 'x-cg-demo-api-key': apiKey}
-      };
-      
-      fetch('https://api.coingecko.com/api/v3/search/trending', options)
+const fetchCriptoTrend = () => {
+    fetch('http://localhost:3000/api/trendings')
         .then(response => response.json())
         .then(response => criptoTrend(response.coins))
         .catch(err => console.error(err));
@@ -273,14 +247,8 @@ function criptoTrend(cripto) {
 
 }
 
-
-function fetchCriptoEmpresas() {
-    const options = {
-        method: 'GET',
-        headers: {accept: 'application/json', 'x-cg-demo-api-key': apiKey}
-      };
-      
-      fetch('https://api.coingecko.com/api/v3/companies/public_treasury/bitcoin', options)
+const fetchCriptoEmpresas = () => {
+    fetch('http://localhost:3000/api/companies')
         .then(response => response.json())
         .then(response => criptoEmpresas(response.companies))
         .catch(err => console.error(err));
