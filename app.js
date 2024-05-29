@@ -1,5 +1,3 @@
-
-
 const fetchBtc = () => {
     fetch('http://localhost:3000/api/bitcoin')
         .then(response => response.json())
