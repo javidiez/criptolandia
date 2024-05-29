@@ -1,6 +1,4 @@
 
-const apiKey = 'CG-YUaZs4DtjnyZJsnxdb9jCPmN';
-
 
 const fetchBtc = () => {
     fetch('http://localhost:3000/api/bitcoin')
