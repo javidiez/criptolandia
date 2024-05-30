@@ -1,9 +1,15 @@
 const fetchBtc = () => {
     fetch('/api/bitcoin')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(response => btc(response))
-        .catch(err => console.error(err));
-} 
+        .catch(err => console.error('Fetch error:', err.message));
+};
+
 
 
 function btc(cripto) {
@@ -47,10 +53,15 @@ function btc(cripto) {
 
 const fetchEth = () => {
     fetch('/api/ethereum')
-        .then(response => response.json())
-        .then(response => eth(response))
-        .catch(err => console.error(err));
-}
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(response => eth(response))
+    .catch(err => console.error('Fetch error:', err.message));
+};
 
 
 function eth(cripto) {
@@ -93,10 +104,15 @@ function eth(cripto) {
 
 const fetchCriptoList = () => {
     fetch('/api/criptolist')
-        .then(response => response.json())
-        .then(response => criptoList(response))
-        .catch(err => console.error(err));
-}
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(response => criptoList(response))
+    .catch(err => console.error('Fetch error:', err.message));
+};
 
 function criptoList(cripto) {
 
@@ -162,10 +178,15 @@ function criptoList(cripto) {
 
 const fetchCriptoExchange = () => {
     fetch('/api/exchanges')
-        .then(response => response.json())
-        .then(response => criptoExchange(response))
-        .catch(err => console.error(err));
-}
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(response => criptoExchange(response))
+    .catch(err => console.error('Fetch error:', err.message));
+};
 
 function criptoExchange(exchange) {
 
@@ -202,10 +223,15 @@ function criptoExchange(exchange) {
 
 const fetchCriptoTrend = () => {
     fetch('/api/trendings')
-        .then(response => response.json())
-        .then(response => criptoTrend(response.coins))
-        .catch(err => console.error(err));
-}
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(response => criptoTrend(response))
+    .catch(err => console.error('Fetch error:', err.message));
+};
 
 function criptoTrend(cripto) {
 
@@ -245,10 +271,15 @@ function criptoTrend(cripto) {
 
 const fetchCriptoEmpresas = () => {
     fetch('/api/companies')
-        .then(response => response.json())
-        .then(response => criptoEmpresas(response.companies))
-        .catch(err => console.error(err));
-}
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(response => criptoEmpresas(response))
+    .catch(err => console.error('Fetch error:', err.message));
+};
 
 function criptoEmpresas(empresa) {
 

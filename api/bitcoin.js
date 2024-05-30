@@ -8,9 +8,15 @@ module.exports = async (req, res) => {
                 'x-cg-demo-api-key': 'CG-YUaZs4DtjnyZJsnxdb9jCPmN'
             }
         });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch: ${response.statusText}`);
+        }
+
         const data = await response.json();
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch data' });
+        console.error('Error fetching data:', error);
+        res.status(500).json({ error: error.message });
     }
 };
