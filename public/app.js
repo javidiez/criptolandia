@@ -229,7 +229,7 @@ const fetchCriptoTrend = () => {
         }
         return response.json();
     })
-    .then(response => criptoTrend(response))
+    .then(response => criptoTrend(response.coins))
     .catch(err => console.error('Fetch error:', err.message));
 };
 
@@ -277,7 +277,7 @@ const fetchCriptoEmpresas = () => {
         }
         return response.json();
     })
-    .then(response => criptoEmpresas(response))
+    .then(response => criptoEmpresas(response.companies))
     .catch(err => console.error('Fetch error:', err.message));
 };
 
