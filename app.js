@@ -3,7 +3,7 @@ const fetchBtc = () => {
         .then(response => response.json())
         .then(response => btc(response))
         .catch(err => console.error(err));
-}
+} 
 
 
 function btc(cripto) {
