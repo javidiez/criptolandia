@@ -1,15 +1,15 @@
-const fetchBtc = () => {
-    fetch('/api/bitcoin')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(response => btc(response))
-        .catch(err => console.error('Fetch error:', err.message));
+const fetch = require('node-fetch');
+
+const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&precision=2';
+const options = {
+  method: 'GET',
+  headers: {accept: 'application/json', 'x-cg-pro-api-key': 'CG-YUaZs4DtjnyZJsnxdb9jCPmN'}
 };
 
+fetch(url, options)
+  .then(res => res.json())
+  .then(json => btc(json))
+  .catch(err => console.error('error:' + err));
 
 
 function btc(cripto) {
@@ -51,18 +51,13 @@ function btc(cripto) {
     })
 }
 
-const fetchEth = () => {
-    fetch('/api/ethereum')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
-        }
-        return response.json();
-    })
-    .then(response => eth(response))
-    .catch(err => console.error('Fetch error:', err.message));
-};
+const url2 = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum&precision=2';
 
+
+fetch(url2, options)
+  .then(res => res.json())
+  .then(json => eth(json))
+  .catch(err => console.error('error:' + err));
 
 function eth(cripto) {
 
@@ -102,17 +97,12 @@ function eth(cripto) {
     })
 }
 
-const fetchCriptoList = () => {
-    fetch('/api/criptolist')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
-        }
-        return response.json();
-    })
-    .then(response => criptoList(response))
-    .catch(err => console.error('Fetch error:', err.message));
-};
+const url3 = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=us';
+
+fetch(url3, options)
+  .then(res => res.json())
+  .then(json => criptoList(json))
+  .catch(err => console.error('error:' + err));
 
 function criptoList(cripto) {
 
@@ -176,17 +166,12 @@ function criptoList(cripto) {
     });
 }
 
-const fetchCriptoExchange = () => {
-    fetch('/api/exchanges')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
-        }
-        return response.json();
-    })
-    .then(response => criptoExchange(response))
-    .catch(err => console.error('Fetch error:', err.message));
-};
+const url4 = 'https://api.coingecko.com/api/v3/exchanges?per_page=10';
+
+fetch(url4, options)
+  .then(res => res.json())
+  .then(json => criptoExchange(json))
+  .catch(err => console.error('error:' + err));
 
 function criptoExchange(exchange) {
 
@@ -221,17 +206,12 @@ function criptoExchange(exchange) {
     });
 }
 
-const fetchCriptoTrend = () => {
-    fetch('/api/trendings')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
-        }
-        return response.json();
-    })
-    .then(response => criptoTrend(response.coins))
-    .catch(err => console.error('Fetch error:', err.message));
-};
+const url5 = 'https://api.coingecko.com/api/v3/search/trending';
+
+fetch(url5, options)
+  .then(res => res.json())
+  .then(json => criptoTrend(json.coins))
+  .catch(err => console.error('error:' + err));
 
 function criptoTrend(cripto) {
 
@@ -269,17 +249,13 @@ function criptoTrend(cripto) {
 
 }
 
-const fetchCriptoEmpresas = () => {
-    fetch('/api/companies')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
-        }
-        return response.json();
-    })
-    .then(response => criptoEmpresas(response.companies))
-    .catch(err => console.error('Fetch error:', err.message));
-};
+const url6 = 'https://api.coingecko.com/api/v3/companies/public_treasury/bitcoin';
+
+
+fetch(url6, options)
+  .then(res => res.json())
+  .then(json => criptoEmpresas(json.companies))
+  .catch(err => console.error('error:' + err));
 
 function criptoEmpresas(empresa) {
 
