@@ -1,5 +1,5 @@
 const fetchBtc = () => {
-    fetch('https://criptolandia.vercel.app/api/bitcoin')
+    fetch('http://localhost:3000/api/bitcoin')
         .then(response => response.json())
         .then(response => btc(response))
         .catch(err => console.error(err));
@@ -46,7 +46,7 @@ function btc(cripto) {
 }
 
 const fetchEth = () => {
-    fetch('https://criptolandia.vercel.app/api/ethereum')
+    fetch('http://localhost:3000/api/ethereum')
         .then(response => response.json())
         .then(response => eth(response))
         .catch(err => console.error(err));
@@ -92,7 +92,7 @@ function eth(cripto) {
 }
 
 const fetchCriptoList = () => {
-    fetch('https://criptolandia.vercel.app/api/criptolist')
+    fetch('http://localhost:3000/api/criptolist')
         .then(response => response.json())
         .then(response => criptoList(response))
         .catch(err => console.error(err));
@@ -161,7 +161,7 @@ function criptoList(cripto) {
 }
 
 const fetchCriptoExchange = () => {
-    fetch('https://criptolandia.vercel.app/api/exchanges')
+    fetch('http://localhost:3000/api/exchanges')
         .then(response => response.json())
         .then(response => criptoExchange(response))
         .catch(err => console.error(err));
@@ -201,7 +201,7 @@ function criptoExchange(exchange) {
 }
 
 const fetchCriptoTrend = () => {
-    fetch('https://criptolandia.vercel.app/api/trendings')
+    fetch('http://localhost:3000/api/trendings')
         .then(response => response.json())
         .then(response => criptoTrend(response.coins))
         .catch(err => console.error(err));
@@ -244,7 +244,7 @@ function criptoTrend(cripto) {
 }
 
 const fetchCriptoEmpresas = () => {
-    fetch('https://criptolandia.vercel.app/api/companies')
+    fetch('http://localhost:3000/api/companies')
         .then(response => response.json())
         .then(response => criptoEmpresas(response.companies))
         .catch(err => console.error(err));
