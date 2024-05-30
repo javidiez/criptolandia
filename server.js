@@ -4,6 +4,7 @@ import express from 'express';
 const app = express();
 const port = 3000;
 
+
 // Permitir CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
