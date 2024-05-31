@@ -139,7 +139,7 @@ function criptoTrendTop3(cripto) {
             let divMarketCapTopTres = document.createElement('div');
             let divVolumeTopTres = document.createElement('div');
 
-            divImage.innerHTML = `<img src=${item.thumb} class="img-fluid me-4 pb-3"/><span class="fs-1">${item.name}</span> <span class='text-secondary fs-5 ps-1'>${item.symbol}</span>`;
+            divImage.innerHTML = `<div class="pb-4"><img src=${item.thumb} class="img-fluid me-4"/><span class="fs-1">${item.name}</span> <span class='text-secondary fs-5 ps-1'>${item.symbol}</span></div>`;
             divPadreTopTres.appendChild(divImage);
 
             let porcentajeFixed = (item.data.price_change_percentage_24h.usd).toFixed(2);
@@ -151,7 +151,7 @@ function criptoTrendTop3(cripto) {
                 divPadre.classList.add('d-flex','flex-wrap','justify-content-evenly');
                 let divValor = document.createElement('div');
                 let divPorcentaje = document.createElement('div');
-                divValor.innerHTML = `${priceFixed}<span class="text-secondary ps-2">USD</span> `;
+                divValor.innerHTML = `${priceFixed}<span class="text-secondary ps-2 gap-1">USD</span> `;
                 divPorcentaje.innerHTML = `<span class="top_3_porcentaje_rojo">${porcentajeFixed} %</span>`;
                 divPadre.appendChild(divValor);
                 divPadre.appendChild(divPorcentaje);
@@ -163,7 +163,7 @@ function criptoTrendTop3(cripto) {
                 divPadre.classList.add('d-flex','flex-wrap','justify-content-evenly');
                 let divValor = document.createElement('div');
                 let divPorcentaje = document.createElement('div');
-                divValor.innerHTML = `${priceFixed}<span class="text-secondary ps-2">USD</span> `;
+                divValor.innerHTML = `${priceFixed}<span class="text-secondary ps-2 gap-1">USD</span> `;
                 divPorcentaje.innerHTML = `<span class="top_3_porcentaje_verde">${porcentajeFixed} %</span>`;
                 divPadre.appendChild(divValor);
                 divPadre.appendChild(divPorcentaje);
