@@ -65,6 +65,27 @@ td {
     color: grey;
 }
 
+.top_3 {
+    border: 1px solid grey;
+    padding: 2rem;
+    font-size: 1.5rem;
+    border-radius: 8px;
+}
+
+.top_3_porcentaje_rojo{
+    border-radius: 100px;
+    color: #fff;
+    background-color: #f52d2d;
+    padding: 2px 10px;
+}
+
+.top_3_porcentaje_verde{
+    border-radius: 100px;
+    color: #fff;
+    background-color: #1ab81a;
+    padding: 2px 15px;
+}
+
 .criptos_pincipales {
     border: 1px solid grey;
     padding: 2rem;

@@ -39,7 +39,7 @@ function btc(cripto) {
             cambioCripto.innerHTML = `<p class="text-light fs-3">Cambio en las ultimas 24 hs:</p>${flechaAbajo} ${valorRedondeado} USD ${porcentajeRedondeado}`;
         }
         else {
-            cambioCripto.style.color = '#0d8d14';
+            cambioCripto.style.color = '#1ab81a';
             cambioCripto.innerHTML = `<p class="text-light fs-3">Cambio en las ultimas 24 hs:</p>${flechaArriba} ${valorRedondeado} USD ${porcentajeRedondeado}`;
         }
 
@@ -103,6 +103,224 @@ function eth(cripto) {
 
     })
 }
+
+
+
+function fetchCriptoTrendTopTres() {
+    const options = {
+        method: 'GET',
+        headers: { accept: 'application/json', 'x-cg-demo-api-key': apiKey }
+    };
+
+    fetch('https://api.coingecko.com/api/v3/search/trending', options)
+        .then(response => response.json())
+        .then(response => criptoTrendTop3(response.coins))
+        .catch(err => console.error(err));
+}
+
+
+function criptoTrendTop3(cripto) {
+
+    const top3 = document.getElementById('top-3');
+    let indice = 1;
+
+    cripto.forEach(criptos => {
+
+        if (indice < 5) {
+
+            let item = criptos.item;
+
+            let divPadreTopTres = document.createElement('div');
+            divPadreTopTres.classList.add('top_3', 'bg-dark', 'text-light', 'col-12', 'col-sm-5', 'text-center', 'fs-3');
+
+
+            let divImage = document.createElement('div');
+            let divValorTopTres = document.createElement('div');
+            let divMarketCapTopTres = document.createElement('div');
+            let divVolumeTopTres = document.createElement('div');
+
+            divImage.innerHTML = `<img src=${item.thumb} class="img-fluid me-4 pb-3"/><span class="fs-1">${item.name}</span> <span class='text-secondary fs-5 ps-1'>${item.symbol}</span>`;
+            divPadreTopTres.appendChild(divImage);
+
+            let porcentajeFixed = (item.data.price_change_percentage_24h.usd).toFixed(2);
+            let priceFixed = (item.data.price).toFixed(8);
+
+            if (porcentajeFixed < 0) {
+
+                divValorTopTres.classList.add('pt-3');
+                divValorTopTres.innerHTML = `${priceFixed} <span class="text-secondary">USD</span> <span class="top_3_porcentaje_rojo ms-5">${porcentajeFixed} %</span>`;
+                divPadreTopTres.appendChild(divValorTopTres);
+
+            }
+            else {
+
+                divValorTopTres.classList.add('pt-3');
+                divValorTopTres.innerHTML = `${priceFixed} <span class="text-secondary">USD</span> <span class="top_3_porcentaje_verde ms-5">${porcentajeFixed} %</span>`;
+                divPadreTopTres.appendChild(divValorTopTres);
+
+            }
+
+            divMarketCapTopTres.innerHTML = `<span class="fw-bold pe-3">Market cap:</span> ${item.data.market_cap}`;
+            divMarketCapTopTres.classList.add('pt-4');
+            divPadreTopTres.appendChild(divMarketCapTopTres);
+
+            divVolumeTopTres.innerHTML = `<span class="fw-bold pe-3">Volumen total:</span> ${item.data.total_volume}`;
+            divVolumeTopTres.classList.add('pt-3');
+            divPadreTopTres.appendChild(divVolumeTopTres);
+
+            top3.appendChild(divPadreTopTres);
+            indice++;
+
+
+        }
+
+    });
+
+}
+
+
+
+
+function fetchCriptoTrend() {
+    const options = {
+        method: 'GET',
+        headers: { accept: 'application/json', 'x-cg-demo-api-key': apiKey }
+    };
+
+    fetch('https://api.coingecko.com/api/v3/search/trending', options)
+        .then(response => response.json())
+        .then(response => criptoTrend(response.coins))
+        .catch(err => console.error(err));
+}
+
+function criptoTrend(cripto) {
+
+    const listadoTrends = document.getElementById('trend_criptos');
+    let indice = 1;
+
+    cripto.forEach(criptos => {
+
+        if (indice < 11) {
+
+            let item = criptos.item;
+            let valorRedondeado = (item.price_change_24h)
+            let porcentajeFixed = (item.data.price_change_percentage_24h.usd)
+            let flechaAbajo = `<i class="bi bi-arrow-down fs-5"></i>`;
+            let flechaArriba = `<i class="bi bi-arrow-up fs-5"></i>`;
+            let symbol = `<span class="text-secondary text-uppercase ms-2">${item.symbol}</span>`;
+            
+            let fila = document.createElement('tr');
+
+            let celdaIndice = document.createElement('td');
+            celdaIndice.textContent = indice++;
+            fila.appendChild(celdaIndice);
+
+            let celdaImgExchange = document.createElement('td');
+            celdaImgExchange.innerHTML = `<img src=${item.small} class="logo_criptos_lista img-fluid me-3">${item.name} <span class="text-secondary">${item.symbol}</span>`
+            fila.appendChild(celdaImgExchange);
+
+            let celdaValorCripto = document.createElement('td');
+
+            if (porcentajeFixed < 0) {
+
+                let celdaPrice = document.createElement('td');
+                let priceFixed = (item.data.price).toFixed(8);
+                celdaPrice.innerHTML = `${priceFixed} <span style="color: #f52d2d">${flechaAbajo} (${porcentajeFixed.toFixed(2)}%)</span>`;
+                fila.appendChild(celdaPrice);
+
+            }
+            else {
+                let celdaPrice = document.createElement('td');
+                let priceFixed = (item.data.price).toFixed(8);
+                celdaPrice.innerHTML = `${priceFixed} <span style="color: #1ab81a">${flechaArriba} (${porcentajeFixed.toFixed(2)}%)</span>`;
+                fila.appendChild(celdaPrice);
+            }
+
+            let celdaMarketCap = document.createElement('td');
+    
+            celdaMarketCap.textContent = item.data.market_cap;
+            fila.appendChild(celdaMarketCap);
+
+            let celdaTotalVol = document.createElement('td');
+            celdaTotalVol.classList.add('text-center');
+            celdaTotalVol.textContent = item.data.total_volume;
+            fila.appendChild(celdaTotalVol);
+
+            let celdaRank = document.createElement('td');
+            celdaRank.classList.add('text-center');
+            celdaRank.textContent = item.market_cap_rank;
+            fila.appendChild(celdaRank);
+
+            listadoTrends.appendChild(fila);
+
+        }
+
+
+    });
+
+}
+
+
+function fetchCriptoExchange() {
+    const options = {
+        method: 'GET',
+        headers: { accept: 'application/json', 'x-cg-demo-api-key': apiKey }
+    };
+
+    fetch('https://api.coingecko.com/api/v3/exchanges?per_page=10', options)
+        .then(response => response.json())
+        .then(response => criptoExchange(response))
+        .catch(err => console.error(err));
+}
+
+function criptoExchange(exchange) {
+
+    const listadoExchanges = document.getElementById('exchange_criptos');
+
+    exchange.forEach(exchanges => {
+
+        let fila = document.createElement('tr');
+
+        let celdaRank = document.createElement('td');
+        celdaRank.textContent = exchanges.trust_score_rank;
+        fila.appendChild(celdaRank);
+
+        let celdaImgExchange = document.createElement('td');
+        celdaImgExchange.innerHTML = exchanges.name
+        fila.appendChild(celdaImgExchange);
+
+
+        let celdaPais = document.createElement('td');
+        celdaPais.textContent = exchanges.country;
+        fila.appendChild(celdaPais);
+
+        let celdaAno = document.createElement('td');
+        celdaAno.textContent = exchanges.year_established;
+        fila.appendChild(celdaAno);
+
+        let celdaScore = document.createElement('td');
+        celdaScore.classList.add('text-center');
+        celdaScore.textContent = exchanges.trust_score;
+        fila.appendChild(celdaScore);
+
+        let celdaBtc = document.createElement('td');
+        let btcOperados24 = (exchanges.trade_volume_24h_btc).toFixed(2);
+        celdaBtc.textContent = btcOperados24;
+        fila.appendChild(celdaBtc);
+
+        let filteredName = exchanges.name.replace(/exchange/i, '').trim();
+        let celdaWebsite = document.createElement('td');
+        celdaWebsite.innerHTML = `<a class="text-primary text-decoration-none" href="${exchanges.url}" target='_blank'>${filteredName}</a>`;
+        fila.appendChild(celdaWebsite);
+
+
+
+        listadoExchanges.appendChild(fila);
+
+    });
+}
+
+
 
 function fetchCriptoList() {
     const options = {
@@ -179,107 +397,16 @@ function criptoList(cripto) {
     });
 }
 
-function fetchCriptoExchange() {
-    const options = {
-        method: 'GET',
-        headers: { accept: 'application/json', 'x-cg-demo-api-key': apiKey }
-    };
 
-   fetch('https://api.coingecko.com/api/v3/exchanges?per_page=10', options)
-        .then(response => response.json())
-        .then(response => criptoExchange(response))
-        .catch(err => console.error(err));
-}
-
-function criptoExchange(exchange) {
-
-    const listadoExchanges = document.getElementById('exchange_criptos');
-
-    exchange.forEach(exchanges => {
-
-        let fila = document.createElement('tr');
-
-        let celdaRank = document.createElement('td');
-        celdaRank.textContent = exchanges.trust_score_rank;
-        fila.appendChild(celdaRank);
-
-        let celdaImgExchange = document.createElement('td');
-        celdaImgExchange.innerHTML = `<img src=${exchanges.image} class="logo_criptos_lista img-fluid me-3">${exchanges.name}`
-        fila.appendChild(celdaImgExchange);
-
-        let celdaScore = document.createElement('td');
-        celdaScore.classList.add('text-center');
-        celdaScore.textContent = exchanges.trust_score;
-        fila.appendChild(celdaScore);
-
-        let celdaBtc = document.createElement('td');
-        let btcOperados24 = (exchanges.trade_volume_24h_btc).toFixed(2);
-        celdaBtc.textContent = btcOperados24;
-        fila.appendChild(celdaBtc);
-
-
-
-        listadoExchanges.appendChild(fila);
-
-    });
-}
-
-function fetchCriptoTrend() {
-    const options = {
-        method: 'GET',
-        headers: {accept: 'application/json', 'x-cg-demo-api-key': apiKey}
-      };
-
-      fetch('https://api.coingecko.com/api/v3/search/trending', options)
-        .then(response => response.json())
-        .then(response => criptoTrend(response.coins))
-        .catch(err => console.error(err));
-}
-
-function criptoTrend(cripto) {
-
-    const listadoTrends = document.getElementById('trend_criptos');
-    let indice = 1;
-
-    cripto.forEach(criptos => {
-        if(indice < 11){
-        let item = criptos.item;
-
-        let fila = document.createElement('tr');
-
-        let celdaIndice = document.createElement('td');
-        celdaIndice.textContent = indice++;
-        fila.appendChild(celdaIndice);
-
-        let celdaImgExchange = document.createElement('td');
-        celdaImgExchange.innerHTML = `<img src=${item.small} class="logo_criptos_lista img-fluid me-3">${item.name}`
-        fila.appendChild(celdaImgExchange);
-
-        let celdaPrice = document.createElement('td');
-        let priceFixed = (item.data.price).toFixed(10);
-        celdaPrice.innerHTML = priceFixed;
-        fila.appendChild(celdaPrice);
-
-        let celdaRank = document.createElement('td');
-        celdaRank.classList.add('text-center');
-        celdaRank.textContent = item.market_cap_rank;
-        fila.appendChild(celdaRank);
-
-        listadoTrends.appendChild(fila);
-    }
-
-    });
-
-}
 
 
 function fetchCriptoEmpresas() {
     const options = {
         method: 'GET',
-        headers: {accept: 'application/json', 'x-cg-demo-api-key': apiKey}
-      };
+        headers: { accept: 'application/json', 'x-cg-demo-api-key': apiKey }
+    };
 
-      fetch('https://api.coingecko.com/api/v3/companies/public_treasury/bitcoin', options)
+    fetch('https://api.coingecko.com/api/v3/companies/public_treasury/bitcoin', options)
         .then(response => response.json())
         .then(response => criptoEmpresas(response.companies))
         .catch(err => console.error(err));
@@ -291,39 +418,39 @@ function criptoEmpresas(empresa) {
     let indice = 1;
 
     empresa.forEach(empresas => {
-        if(indice < 26){
-        let fila = document.createElement('tr');
-        fila.classList.add(('empresas'))
+        if (indice < 26) {
+            let fila = document.createElement('tr');
+            fila.classList.add(('empresas'))
 
-        let celdaIndice = document.createElement('td');
-        celdaIndice.textContent = indice++;
-        fila.appendChild(celdaIndice);
+            let celdaIndice = document.createElement('td');
+            celdaIndice.textContent = indice++;
+            fila.appendChild(celdaIndice);
 
-        let celdaImgExchange = document.createElement('td');
-        celdaImgExchange.innerHTML = empresas.name
-        fila.appendChild(celdaImgExchange);
+            let celdaImgExchange = document.createElement('td');
+            celdaImgExchange.innerHTML = empresas.name
+            fila.appendChild(celdaImgExchange);
 
-        let celdaTotalHolding = document.createElement('td');
-        celdaTotalHolding.innerHTML = empresas.total_holdings
-        fila.appendChild(celdaTotalHolding);
+            let celdaTotalHolding = document.createElement('td');
+            celdaTotalHolding.innerHTML = empresas.total_holdings
+            fila.appendChild(celdaTotalHolding);
 
 
-        let celdaPorcentaje = document.createElement('td');
-        celdaPorcentaje.textContent = empresas.percentage_of_total_supply;
-        fila.appendChild(celdaPorcentaje);
+            let celdaPorcentaje = document.createElement('td');
+            celdaPorcentaje.textContent = empresas.percentage_of_total_supply;
+            fila.appendChild(celdaPorcentaje);
 
-        let celdaPais = document.createElement('td');
-        celdaPais.textContent = empresas.country;
-        fila.appendChild(celdaPais);
+            let celdaPais = document.createElement('td');
+            celdaPais.textContent = empresas.country;
+            fila.appendChild(celdaPais);
 
-        listadoEmpresas.appendChild(fila);
+            listadoEmpresas.appendChild(fila);
         }
     });
 
 }
 
 // ACHICAR MENU DEL HTML CUANDO SE HACE SCROLL HACIA ABAJO
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function () {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
         navbar.classList.add('shrink');
@@ -367,10 +494,10 @@ document.addEventListener('keyup', e => {
 })
 
 // BOTON PARA SUBIR ARRIBA DE TODO
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const irArriba = document.getElementById('ir-arriba');
 
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         if (window.scrollY > 600) { // Ajusta el valor según cuándo quieras mostrar el botón
             irArriba.classList.add('show');
         } else {
@@ -378,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    irArriba.addEventListener('click', function() {
+    irArriba.addEventListener('click', function () {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -393,3 +520,4 @@ document.addEventListener('DOMContentLoaded', fetchCriptoList);
 document.addEventListener('DOMContentLoaded', fetchCriptoExchange);
 document.addEventListener('DOMContentLoaded', fetchCriptoTrend);
 document.addEventListener('DOMContentLoaded', fetchCriptoEmpresas);
+document.addEventListener('DOMContentLoaded', fetchCriptoTrendTopTres);

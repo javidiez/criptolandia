@@ -50,10 +50,10 @@
                             <a class="nav-link active text-light menu" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light menu" href="#exchangers_title">Exchangers</a>
+                            <a class="nav-link text-light menu" href="#trendings_title">Trendings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light menu" href="#trendings_title">Trendings</a>
+                            <a class="nav-link text-light menu" href="#exchangers_title">Exchangers</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light menu" href="#cripto_list_title">CriptoList</a>
@@ -88,34 +88,20 @@
         </div>
         <hr class="border-2 border-top border-secondary mt-5" />
 
-        <div class="d-flex justify-content-around my-5 flex-wrap">
-            <div>
-                <h3 class="text-center text-light display-4 mb-5" id="exchangers_title">Exchanges</h3>
-                <div class="table-responsive">
-                    <table class="table table-hover table-dark mb-5">
-                        <thead>
-                            <tr class="fw-bold">
-                                <td>Rank</td>
-                                <td>Nombre</td>
-                                <td>Trust score</td>
-                                <td>BTC 24 hs</td>
-                            </tr>
-                        </thead>
-                        <tbody id="exchange_criptos">
+        <h3 class="text-center text-light display-2 m-5" id="trendings_title">Trendings</h3>
 
-                        </tbody>
-                    </table>
-                </div>
+        <div class="d-flex flex-wrap justify-content-center gap-5">
+            <div id="top-3" class="row gap-5 justify-content-center">
             </div>
-            <div>
-                <h3 class="text-center text-light display-4 mb-5" id="trendings_title">Trendings</h3>
-                <div class="table-responsive">
-                    <table class="table table-hover table-dark mb-5">
+                <div class="table-responsive-sm container">
+                    <table class="table table-hover table-dark table-responsive mb-5">
                         <thead>
                             <tr class="fw-bold">
                                 <td>#</td>
                                 <td>Criptomoneda</td>
                                 <td>Valor (USD)</td>
+                                <td>Market Cap.</td>
+                                <td>Volumen Total</td>
                                 <td>Cap. rank</td>
 
                             </tr>
@@ -125,12 +111,36 @@
                         </tbody>
                     </table>
                 </div>
+
+        </div>
+
+        <hr class="border-2 border-top border-secondary mt-5" />
+
+        <div class="d-flex justify-content-center my-5 flex-wrap ">
+                <h3 class="text-center text-light display-2 mb-5" id="exchangers_title">Exchanges</h3>
+                <div class="table-responsive container">
+                    <table class="table table-hover table-dark mb-5">
+                        <thead>
+                            <tr class="fw-bold">
+                                <td>Rank</td>
+                                <td>Nombre</td>
+                                <td>País</td>
+                                <td>Año</td>
+                                <td>Trust score</td>
+                                <td>BTC 24 hs</td>
+                                <td>Website</td>
+                            </tr>
+                        </thead>
+                        <tbody id="exchange_criptos">
+
+                        </tbody>
+                    </table>
             </div>
         </div>
 
         <hr class="border-2 border-top border-secondary mt-5" />
 
-        <h2 class="text-center text-light display-4 mt-5" id="cripto_list_title">Listado de criptomonedas</h2>
+        <h2 class="text-center text-light display-2 mt-5" id="cripto_list_title">Listado de criptomonedas</h2>
 
         <div class="input-group mb-3">
             <input type="text" class="buscador bg-dark form-control mt-4 text-center border-secondary"
@@ -157,13 +167,13 @@
 
         <hr class="border-2 border-top border-secondary mt-5" />
 
-        <h2 class="text-center text-light display-4 mt-5" id="companias_list_title">Compañías con BTC</h2>
+        <h2 class="text-center text-light display-2 mt-5" id="companias_list_title">Compañías con BTC</h2>
 
         <div class="input-group mb-3">
             <input type="text" class="buscador bg-dark form-control mt-4 text-center border-secondary"
                 placeholder="Buscar" aria-label="criptomonedas" aria-describedby="basic-addon1" id="buscador_empresas">
         </div>
-        <div class="table-responsive-sm">
+        <div class="table-responsive-sm container">
             <table class="table table-hover table-dark table-responsive mb-5">
                 <thead>
                     <tr class="fw-bold">
