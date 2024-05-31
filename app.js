@@ -147,16 +147,27 @@ function criptoTrendTop3(cripto) {
 
             if (porcentajeFixed < 0) {
 
-                divValorTopTres.classList.add('pt-3');
-                divValorTopTres.innerHTML = `${priceFixed} <span class="text-secondary">USD</span> <span class="top_3_porcentaje_rojo ms-5">${porcentajeFixed} %</span>`;
-                divPadreTopTres.appendChild(divValorTopTres);
+                let divPadre = document.createElement('div')
+                divPadre.classList.add('d-flex','flex-wrap','justify-content-evenly');
+                let divValor = document.createElement('div');
+                let divPorcentaje = document.createElement('div');
+                divValor.innerHTML = `${priceFixed}<span class="text-secondary ps-2">USD</span> `;
+                divPorcentaje.innerHTML = `<span class="top_3_porcentaje_rojo">${porcentajeFixed} %</span>`;
+                divPadre.appendChild(divValor);
+                divPadre.appendChild(divPorcentaje);
+                divPadreTopTres.appendChild(divPadre);
 
             }
             else {
-
-                divValorTopTres.classList.add('pt-3');
-                divValorTopTres.innerHTML = `${priceFixed} <span class="text-secondary">USD</span> <span class="top_3_porcentaje_verde ms-5">${porcentajeFixed} %</span>`;
-                divPadreTopTres.appendChild(divValorTopTres);
+                let divPadre = document.createElement('div')
+                divPadre.classList.add('d-flex','flex-wrap','justify-content-evenly');
+                let divValor = document.createElement('div');
+                let divPorcentaje = document.createElement('div');
+                divValor.innerHTML = `${priceFixed}<span class="text-secondary ps-2">USD</span> `;
+                divPorcentaje.innerHTML = `<span class="top_3_porcentaje_verde">${porcentajeFixed} %</span>`;
+                divPadre.appendChild(divValor);
+                divPadre.appendChild(divPorcentaje);
+                divPadreTopTres.appendChild(divPadre);
 
             }
 
