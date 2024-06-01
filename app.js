@@ -143,10 +143,14 @@ function criptoTrendTop3(cripto) {
             divPadreTopTres.appendChild(divImage);
 
             let porcentajeFixed = (item.data.price_change_percentage_24h.usd).toFixed(2);
-            let priceFixed = (item.data.price).toFixed(8);
+            
+
+            if(item.data.price > 1){
+               
 
             if (porcentajeFixed < 0) {
 
+                let priceFixed = (item.data.price).toFixed(2);
                 let divPadre = document.createElement('div')
                 divPadre.classList.add('d-flex','flex-wrap','justify-content-evenly');
                 let divValor = document.createElement('div');
@@ -159,6 +163,7 @@ function criptoTrendTop3(cripto) {
 
             }
             else {
+                let priceFixed = (item.data.price).toFixed(2);
                 let divPadre = document.createElement('div')
                 divPadre.classList.add('d-flex','flex-wrap','justify-content-evenly');
                 let divValor = document.createElement('div');
@@ -168,8 +173,36 @@ function criptoTrendTop3(cripto) {
                 divPadre.appendChild(divValor);
                 divPadre.appendChild(divPorcentaje);
                 divPadreTopTres.appendChild(divPadre);
+            }
+        }
+        else{
+            if (porcentajeFixed < 0) {
+
+                let priceFixed = (item.data.price).toFixed(8);
+                let divPadre = document.createElement('div')
+                divPadre.classList.add('d-flex','flex-wrap','justify-content-evenly');
+                let divValor = document.createElement('div');
+                let divPorcentaje = document.createElement('div');
+                divValor.innerHTML = `${priceFixed}<span class="text-secondary ps-2 gap-1">USD</span> `;
+                divPorcentaje.innerHTML = `<span class="top_3_porcentaje_rojo">${porcentajeFixed} %</span>`;
+                divPadre.appendChild(divValor);
+                divPadre.appendChild(divPorcentaje);
+                divPadreTopTres.appendChild(divPadre);
 
             }
+            else {
+                let priceFixed = (item.data.price).toFixed(8);
+                let divPadre = document.createElement('div')
+                divPadre.classList.add('d-flex','flex-wrap','justify-content-evenly');
+                let divValor = document.createElement('div');
+                let divPorcentaje = document.createElement('div');
+                divValor.innerHTML = `${priceFixed}<span class="text-secondary ps-2 gap-1">USD</span> `;
+                divPorcentaje.innerHTML = `<span class="top_3_porcentaje_verde">${porcentajeFixed} %</span>`;
+                divPadre.appendChild(divValor);
+                divPadre.appendChild(divPorcentaje);
+                divPadreTopTres.appendChild(divPadre);
+            }
+        }
 
             divMarketCapTopTres.innerHTML = `<span class="fw-bold pe-3">Market cap:</span> ${item.data.market_cap}`;
             divMarketCapTopTres.classList.add('pt-4');
@@ -214,7 +247,6 @@ function criptoTrend(cripto) {
         if (indice < 11) {
 
             let item = criptos.item;
-            let valorRedondeado = (item.price_change_24h)
             let porcentajeFixed = (item.data.price_change_percentage_24h.usd)
             let flechaAbajo = `<i class="bi bi-arrow-down fs-5"></i>`;
             let flechaArriba = `<i class="bi bi-arrow-up fs-5"></i>`;
@@ -230,15 +262,31 @@ function criptoTrend(cripto) {
             celdaImgExchange.innerHTML = `<img src=${item.small} class="logo_criptos_lista img-fluid me-3">${item.name} <span class="text-secondary">${item.symbol}</span>`
             fila.appendChild(celdaImgExchange);
 
-            let celdaValorCripto = document.createElement('td');
+            if(item.data.price > 1){
 
             if (porcentajeFixed < 0) {
-
+           
+                let celdaPrice = document.createElement('td');
+                let priceFixed = (item.data.price).toFixed(2);
+                celdaPrice.innerHTML = `${priceFixed} <span style="color: #f52d2d">${flechaAbajo} (${porcentajeFixed.toFixed(2)}%)</span>`;
+                fila.appendChild(celdaPrice);
+       
+            }
+            else {
+                let celdaPrice = document.createElement('td');
+                let priceFixed = (item.data.price).toFixed(2);
+                celdaPrice.innerHTML = `${priceFixed} <span style="color: #1ab81a">${flechaArriba} (${porcentajeFixed.toFixed(2)}%)</span>`;
+                fila.appendChild(celdaPrice);
+            }
+        }
+        else{
+            if (porcentajeFixed < 0) {
+           
                 let celdaPrice = document.createElement('td');
                 let priceFixed = (item.data.price).toFixed(8);
                 celdaPrice.innerHTML = `${priceFixed} <span style="color: #f52d2d">${flechaAbajo} (${porcentajeFixed.toFixed(2)}%)</span>`;
                 fila.appendChild(celdaPrice);
-
+       
             }
             else {
                 let celdaPrice = document.createElement('td');
@@ -246,6 +294,7 @@ function criptoTrend(cripto) {
                 celdaPrice.innerHTML = `${priceFixed} <span style="color: #1ab81a">${flechaArriba} (${porcentajeFixed.toFixed(2)}%)</span>`;
                 fila.appendChild(celdaPrice);
             }
+        }
 
             let celdaMarketCap = document.createElement('td');
     
@@ -371,7 +420,6 @@ function criptoList(cripto) {
         fila.appendChild(celdaImgCripto);
 
         let celdaNombreCripto = document.createElement('td');
-        celdaNombreCripto.classList.add('text-center');
         celdaNombreCripto.innerHTML = criptomoneda.current_price;
         fila.appendChild(celdaNombreCripto);
 
